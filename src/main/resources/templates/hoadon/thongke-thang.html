@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thống kê theo tháng</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <th:block th:replace="layout :: header"></th:block>
+    <div id="content-wrapper">
+        <div id="content">
+            <th:block th:replace="layout :: nav"></th:block>
+            <div class="container-fluid">
+                <div>
+                    <label for="yearSelect">Chọn năm:</label>
+                    <select id="yearSelect" onchange="loadRevenueData(this.value)">
+                        <option value="2020">2020</option>
+                        <option value="2021">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                    </select>
+                </div>
+                <canvas id="revenueChart"></canvas>
+                <script th:inline="javascript">
+                    let revenueData = {};
+                    let months = Object.keys(revenueData);
+                    let revenueValues = Object.values(revenueData);
+
+                    const ctx = document.getElementById('revenueChart').getContext('2d');
+                    const revenueChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: months,
+                            datasets: [{
+                                label: 'Doanh thu',
+                                data: revenueValues,
+                                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            }
+                        }
+                    });
+
+                    function loadRevenueData(year) {
+                        fetch('/thongkethang-data?year=' + year)
+                            .then(response => response.json())
+                            .then(data => {
+                                revenueData = data;
+                                months = Object.keys(revenueData);
+                                revenueValues = Object.values(revenueData);
+
+                                revenueChart.data.labels = months;
+                                revenueChart.data.datasets[0].data = revenueValues;
+                                revenueChart.update();
+                            });
+                    }
+                    const currentYear = new Date().getFullYear();
+                    document.getElementById('yearSelect').value = currentYear;
+                    // Load dữ liệu thống kê ban đầu cho năm hiện tại
+                    loadRevenueData(currentYear);
+                </script>
+            </div>
+            <th:block th:replace="layout :: footer"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

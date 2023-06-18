@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <th:block th:replace="layout :: header"></th:block>
+    <div id="content-wrapper">
+        <div id="content">
+            <th:block th:replace="layout :: nav"></th:block>
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8">
+                        <h3 class="card-title text-center text-uppercase my-3">Sign up</h3>
+                        <form th:action="@{/register}" th:object="${account}" method="POST" onsubmit="return validateForm()">
+                            <div class="mb-4">
+                                <label class="form-label" for="username">Email:</label><span class="text-danger"> *</span>
+                                <input type="email" class="form-control" id="username" th:field="*{username}" required>
+                                <span class="text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></span>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="password">Mật khẩu:</label><span class="text-danger"> *</span>
+                                <input type="password" class="form-control" id="password" th:field="*{password}" required>
+                                <span class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="confirmPassword">Xác nhận mật khẩu:</label>
+                                <input type="password" class="form-control" id="confirmPassword"
+                                       required oninput="checkPasswordMatch(this);">
+                                <span id="passwordMatchError" class="text-danger"></span>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label" for="macuahang">Mã cửa hàng:</label><span class="text-danger"> *</span>
+                                <input type="text" class="form-control" id="macuahang" th:field="*{macuahang}" required>
+                                <span class="text-danger" th:if="${#fields.hasErrors('macuahang')}" th:errors="*{macuahang}"></span>
+                            </div>
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="form-control btn btn-primary">Sign up</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <th:block th:replace="layout :: footer"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+<script>
+function checkPasswordMatch(input) {
+    var passwordInput = document.getElementById("password").value;
+    var confirmPasswordInput = input.value;
+    var errorSpan = document.getElementById("passwordMatchError");
+    if (passwordInput == confirmPasswordInput) {
+      errorSpan.innerText = "";
+    } else {
+      errorSpan.innerText = "Mật khẩu không khớp.";
+    }
+}
+function validateForm() {
+    var passwordInput = document.getElementById("password").value;
+    var confirmPasswordInput = document.getElementById("confirmPassword").value;
+    if (passwordInput !== confirmPasswordInput) {
+      alert("Mật khẩu không khớp. Vui lòng kiểm tra lại.");
+      return false;
+    }
+    return true;
+}
+</script>

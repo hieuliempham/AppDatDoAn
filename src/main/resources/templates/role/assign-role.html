@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${'Gán quyền cho ' + account.username}"></title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <th:block th:replace="layout :: header"></th:block>
+    <div id="content-wrapper">
+        <div id="content">
+            <th:block th:replace="layout :: nav"></th:block>
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <div class="alert alert-danger d-inline-block" th:if="${exists}" th:text="${exists}"></div>
+                        <div class="alert alert-success d-inline-block" th:if="${success}" th:text="${success}"></div>
+                        <form th:action="@{/role/assign-role}" method="POST">
+                            <input type="hidden" name="accountId" th:value="${account.accountId}">
+                            <div>
+                                <label class="form-label font-weight-bold">Username:</label>
+                                <span th:text="${account.username}"></span>
+                            </div>
+
+                            <div class="mt-2">
+                                <label class="form-label font-weight-bold">Quyền hiện có:</label>
+                                <span th:each="roleAccount, iterStat : ${rolesOfAccount}">
+                                    <span th:text="${roleAccount}"></span>
+                                    <span th:if="${!iterStat.last}">,</span>
+                                </span>
+                            </div>
+
+                            <div class="mt-2 d-flex">
+                                <button class="btn btn-sm btn-primary mr-3" type="button" data-toggle="collapse" data-target="#collapseAssign"
+                                        aria-expanded="false" aria-controls="collapseAssign">
+                                    Gán quyền
+                                </button>
+                                <button class="btn btn-sm btn-danger" type="button" data-toggle="collapse" data-target="#collapseDelRole"
+                                        aria-expanded="false" aria-controls="collapseDelRole">
+                                    Xóa quyền
+                                </button>
+                            </div>
+
+                            <!--Gán Quyền-->
+                            <div class="collapse mt-3" id="collapseAssign">
+                                <div class="col-md-2">
+                                    <h5 class="form-label text-center" for="assign-role">Chọn quyền cần gán: </h5>
+                                    <select class="form-control" id="assign-role" name="roleId">
+                                        <option th:each="role : ${roles}" th:value="${role.roleId}"
+                                                th:text="${role.roleName}"></option>
+                                    </select>
+                                    <button class="btn btn-sm btn-outline-primary form-control mt-3" type="submit">Gán quyền</button>
+                                </div>
+                            </div>
+
+                            <!--Xóa Quyền-->
+                            <div class="collapse mt-3" id="collapseDelRole">
+                                <div class="col-md-2">
+                                    <h5 class="form-label text-danger text-center" for="assign-role">Chọn quyền cần xóa: </h5>
+                                    <select class="form-control" id="delete-role" name="roleIdDel">
+                                        <option th:each="role : ${roles}" th:value="${role.roleId}"
+                                                th:text="${role.roleName}"></option>
+                                    </select>
+                                    <button class="btn btn-sm btn-outline-danger form-control mt-3" type="submit"
+                                            th:formaction="@{/role/remove-role-from-account}">Xóa quyền
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <th:block th:replace="layout :: footer"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Quyền</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <th:block th:replace="layout :: header"></th:block>
+    <div id="content-wrapper">
+        <div id="content">
+            <th:block th:replace="layout :: nav"></th:block>
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Thêm quyền</h6>
+                    </div>
+                    <form class="col-md-3 p-4" th:action="@{/role/add-role}" th:object="${newRole}" method="POST">
+                        <div class="mb-2">
+                            <label class="form-label" for="roleName" style="width:90px">Tên Quyền: </label>
+                            <input class="form-control" type="text" id="roleName" th:field="*{roleName}">
+                            <span class="text-danger" th:if="${#fields.hasErrors('roleName')}" th:errors="*{roleName}"></span>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label" for="description" style="width:90px">Mô Tả: </label>
+                            <input class="form-control" type="text" id="description" th:field="*{description}">
+                            <span class="text-danger" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+                        </div>
+                        <button class="btn btn-outline-primary form-control" type="submit">Thêm</button>
+                    </form>
+                </div>
+            </div>
+            <th:block th:replace="layout :: footer"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

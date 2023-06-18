@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm Sản Phẩm</title>
+    <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+    <th:block th:replace="layout :: header"></th:block>
+    <div id="content-wrapper">
+        <div id="content">
+            <th:block th:replace="layout :: nav"></th:block>
+            <div class="container-fluid">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Thêm sản phẩm</h6>
+                    </div>
+                    <form class="p-4" th:action="@{/san-pham/them-san-pham}" th:object="${newSanPham}" method="POST" enctype="multipart/form-data">
+                        <input type="hidden" th:value="${macuahang}" name="cuahang">
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label class="form-label" for="tensanpham">Tên Sản Phẩm:</label><span class="text-danger"> *</span>
+                                <input class="form-control" type="text" id="tensanpham" th:field="*{tensanpham}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('tensanpham')}" th:errors="*{tensanpham}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="loaisanpham">Loại Sản Phẩm:</label>
+                                <select class="form-control" id="loaisanpham" name="loaisanpham.maloai">
+                                    <option value="">-- Chọn loại sản phẩm --</option>
+                                    <option th:each="loaiSanPham: ${loaiSanPhams}" th:value="${loaiSanPham.maloai}"
+                                            th:text="${loaiSanPham.tenloai}"></option>
+                                </select>
+                                <span class="text-danger" th:if="${#fields.hasErrors('loaisanpham')}" th:errors="*{loaisanpham}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="phanloai">Phân loại:</label>
+                                <input class="form-control" type="text" id="phanloai" th:field="*{phanloai}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('phanloai')}" th:errors="*{phanloai}"></span>
+                            </div>
+                        </div>
+
+                        <div class="mt-2">
+                            <label class="form-label" for="mota">Mô Tả: </label>
+                            <textarea class="form-control" id="mota" th:field="*{mota}" style="height:300px"></textarea>
+                            <span class="text-danger" th:if="${#fields.hasErrors('mota')}" th:errors="*{mota}"></span>
+                        </div>
+
+                        <div class="row mt-2">
+                            <div class="col">
+                                <label class="form-label" for="gia">Giá: </label>
+                                <input class="form-control" type="text" id="gia" th:field="*{gia}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('gia')}" th:errors="*{gia}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="tinhtrang">Tình Trạng: </label>
+                                <input class="form-control" type="text" id="tinhtrang" th:field="*{tinhtrang}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('tinhtrang')}" th:errors="*{tinhtrang}"></span>
+                            </div>
+                            <div class="col">
+                                <label class="form-label" for="ghichu">Ghi Chú: </label>
+                                <input class="form-control" type="text" id="ghichu" th:field="*{ghichu}">
+                                <span class="text-danger" th:if="${#fields.hasErrors('ghichu')}" th:errors="*{ghichu}"></span>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <label class="form-label" for="file">Hình Ảnh:</label>
+                            <input class="form-control" type="file" id="file" name="file" required>
+                        </div>
+
+                        <button class="btn btn-success form-control mt-3" type="submit">Thêm sản phẩm</button>
+                    </form>
+                </div>
+            </div>
+            <th:block th:replace="layout :: footer"></th:block>
+        </div>
+    </div>
+</div>
+</body>
+</html>

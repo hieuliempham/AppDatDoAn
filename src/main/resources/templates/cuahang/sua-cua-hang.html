@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+  <meta charset="UTF-8">
+  <title>Sửa Cửa Hàng</title>
+  <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+  <th:block th:replace="layout :: header"></th:block>
+  <div id="content-wrapper">
+    <div id="content">
+      <th:block th:replace="layout :: nav"></th:block>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Sửa cửa hàng</h6>
+          </div>
+          <form class="p-4" th:action="@{/cua-hang/sua-cua-hang}" th:object="${editCuaHang}" method="POST" enctype="multipart/form-data">
+            <p class="alert alert-warning text-center" th:if="${message}" th:text="${message}"></p>
+            <input type="hidden" th:field="*{macuahang}">
+            <input type="hidden" th:field="*{luotdanhgia}">
+            <input type="hidden" th:field="*{chatluong}">
+            <div class="row mt-2">
+              <div class="col">
+                <label class="form-label" for="tencuahang">Tên Cửa Hàng:</label><span class="text-danger"> *</span>
+                <input class="form-control" type="text" id="tencuahang" th:field="*{tencuahang}">
+              </div>
+              <div class="col">
+                <label class="form-label" for="sodienthoai">Số Điện Thoại:</label><span class="text-danger"> *</span>
+                <input class="form-control" id="sodienthoai" th:field="*{sodienthoai}">
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <label class="form-label" for="tinhtrang">Tình Trạng:</label>
+              <textarea class="form-control" id="tinhtrang" th:field="*{tinhtrang}" style="height:300px"></textarea>
+              <span class="text-danger" th:if="${#fields.hasErrors('tinhtrang')}" th:errors="*{tinhtrang}"></span>
+            </div>
+
+            <div class="row mt-2">
+              <div class="col">
+                <label class="form-label" for="diachi">Địa Chỉ:</label><span class="text-danger"> *</span>
+                <input class="form-control" type="text" id="diachi" th:field="*{diachi}">
+              </div>
+              <div class="col">
+                <label class="form-label" for="giomocua">Giờ Mở Cửa:</label>
+                <input class="form-control" type="time" id="giomocua" th:field="*{giomocua}">
+              </div>
+              <div class="col">
+                <label class="form-label" for="giodongcua">Giờ Đóng Cửa:</label>
+                <input class="form-control" type="time" id="giodongcua" th:field="*{giodongcua}">
+              </div>
+            </div>
+
+            <div class="mt-2">
+              <label class="form-label" for="file">Hình Ảnh: </label>
+              <input class="form-control" type="file" id="file" name="file">
+            </div>
+            <button class="btn btn-success form-control mt-3" type="submit">Sửa cửa hàng</button>
+          </form>
+        </div>
+      </div>
+      <th:block th:replace="layout :: footer"></th:block>
+    </div>
+  </div>
+</div>
+</body>
+</html>

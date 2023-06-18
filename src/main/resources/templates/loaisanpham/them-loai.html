@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+  <meta charset="UTF-8">
+  <title>Thêm Loại</title>
+  <th:block th:replace="layout :: link-css"></th:block>
+</head>
+<body id="page-top">
+<div id="wrapper">
+  <th:block th:replace="layout :: header"></th:block>
+  <div id="content-wrapper">
+    <div id="content">
+      <th:block th:replace="layout :: nav"></th:block>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Thêm Loại</h6>
+          </div>
+          <form class="p-4" th:action="@{/loai-san-pham/them-loai}" th:object="${newLoai}" method="POST">
+            <div class="col-md-4">
+              <label class="form-label" for="tenloai">Tên loại:</label><span class="text-danger"> *</span>
+              <input class="form-control" type="text" id="tenloai" th:field="*{tenloai}">
+              <span class="text-danger" th:if="${#fields.hasErrors('tenloai')}" th:errors="*{tenloai}"></span>
+              <button class="btn btn-success form-control mt-3" type="submit">Thêm loại</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <th:block th:replace="layout :: footer"></th:block>
+    </div>
+  </div>
+</div>
+</body>
+</html>

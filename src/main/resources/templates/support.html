@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+  <meta charset="UTF-8">
+  <title>Đăng ký cửa hàng</title>
+  <th:block th:replace="layout :: link-css"></th:block>
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+<div id="wrapper">
+  <th:block th:replace="layout :: header"></th:block>
+  <div id="content-wrapper">
+    <div id="content">
+      <th:block th:replace="layout :: nav"></th:block>
+      <div class="container-fluid">
+        <div class="container">
+          <h1>Đăng ký cửa hàng</h1>
+          <form th:action="@{/support}" method="POST">
+            <div class="row">
+              <div class="col">
+                <label for="name">Họ và tên của bạn:</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+              </div>
+              <div class="col">
+                <label for="email">Địa chỉ email của bạn:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+              </div>
+            </div>
+
+            <div class="row mt-3">
+              <div class="col">
+                <label for="tencuahang">Tên cửa hàng của bạn:</label>
+                <input type="text" class="form-control" id="tencuahang" name="tencuahang" required>
+              </div>
+              <div class="col">
+                <label for="phone">Số điện thoại:</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+              </div>
+            </div>
+
+            <div class="form-group mt-3">
+              <label for="message">Nội dung:</label>
+              <textarea class="form-control" id="message" name="message" rows="5"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary form-control">Gửi</button>
+          </form>
+        </div>
+      </div>
+      <th:block th:replace="layout :: footer"></th:block>
+    </div>
+  </div>
+</div>
+
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/js/datatables-demo.js"></script>
+</body>
+</html>

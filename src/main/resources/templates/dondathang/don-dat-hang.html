@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách đơn đặt hàng</title>
+  <th:block th:replace="layout :: link-css"></th:block>
+  <link href="/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+<div id="wrapper">
+  <th:block th:replace="layout :: header"></th:block>
+  <div id="content-wrapper">
+    <div id="content">
+      <th:block th:replace="layout :: nav"></th:block>
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h5 class="font-weight-bold text-primary">Đơn đặt hàng</h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                  <th>Mã Đơn Hàng</th>
+                  <th>Tên Khách Hàng</th>
+                  <th>Số Điện Thoại</th>
+                  <th>Ngày Đặt</th>
+                  <th>Giờ Hẹn</th>
+                  <th>Tình Trạng</th>
+                  <th>Thao Tác</th>
+                </tr>
+                </thead>
+                <tfoot>
+                <tr>
+                  <th>Mã Đơn Hàng</th>
+                  <th>Tên Khách Hàng</th>
+                  <th>Số Điện Thoại</th>
+                  <th>Ngày Đặt</th>
+                  <th>Giờ Hẹn</th>
+                  <th>Tình Trạng</th>
+                  <th>Thao Tác</th>
+                </tr>
+                </tfoot>
+                <tbody>
+                <tr th:each="donDatHang: ${donDatHangs}">
+                  <td th:text="${donDatHang.madondathang}"></td>
+                  <td th:text="${donDatHang.khachhang.tenkhachhang}"></td>
+                  <td th:text="${donDatHang.khachhang.sodienthoai}"></td>
+                  <td th:text="${donDatHang.ngaydat}"></td>
+                  <td th:text="${donDatHang.giohen}"></td>
+                  <td th:text="${donDatHang.tinhtrang}"></td>
+                  <td>
+                    <a th:href="@{'/don-dat-hang/chi-tiet-don-hang/' + ${donDatHang.madondathang}}"
+                       class="link-primary">Xem chi tiết đơn hàng</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <th:block th:replace="layout :: footer"></th:block>
+    </div>
+  </div>
+</div>
+
+<script src="/vendor/datatables/jquery.dataTables.min.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<script src="/js/datatables-demo.js"></script>
+</body>
+</html>
