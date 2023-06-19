@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Basic -->
+
+<head th:replace="fragments::head">
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<!-- Start Main Top -->
+<div th:replace="fragments::main-top">
+
+</div>
+<!-- End Main Top -->
+
+
+<!-- Start Main Top -->
+<header th:replace="fragments::main-header">
+</header>
+<!-- End Main Top -->
+
+<!-- Start Top Search -->
+<div th:replace="fragments::top-search">
+</div>
+<!-- End Top Search -->
+
+<!-- Start All Title Box -->
+<div th:replace="fragments::slider">
+</div>
+<!-- End All Title Box -->
+
+<!-- Start My Account  -->
+<div class="container">
+    <div class="row my-2">
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="img/profile.jpg" width="200px" height="200px" class="mx-auto img-fluid img-circle d-block"
+                 alt="Profile picture"/>
+        </div>
+        <div class="col-lg-8 order-lg-2">
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <h1><b>Your Profile</b></h1>
+                    <h2> <span style="font-size: medium;"></span></h2>
+                    <h4>Email: </h4>
+                    <h4>Phone: </h4>
+                    <h4></h4>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="my-account-box-main">
+    <div class="container">
+        <div class="my-account-page">
+            <div class="row">
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"> <i class="fa fa-gift"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4>Your Orders</h4>
+                                <p>Track, return, or buy things again</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"><i class="fa fa-lock"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4>Login &amp; security</h4>
+                                <p>Edit login, name, and mobile number</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"> <i class="fa fa-location-arrow"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4>Your Addresses</h4>
+                                <p>Edit addresses for orders and gifts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End My Account -->
+
+<!-- Start Feed  -->
+<div th:replace="fragments::instagram-box">
+</div>
+
+<!-- End Feed  -->
+
+
+<!-- Start Footer  -->
+<footer th:replace="fragments::footer"></footer>
+
+<!-- ALL JS FILES -->
+<div th:replace = "fragments::script"></div>
+</body>
+
+</html>

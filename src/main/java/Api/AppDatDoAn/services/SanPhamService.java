@@ -40,6 +40,10 @@ public class SanPhamService {
         return sanPhamReponsitory.searchByNameAndTheLoai(name, theLoai);
     }
 
+    public List<SanPham> timKiemTheoLoai(Long theLoai) {
+        return sanPhamReponsitory.searchByTheLoai(theLoai);
+    }
+
     public SanPham saveSanPham(SanPham sanPham) {
         String masanpham = RandomStringUtils.randomAlphanumeric(10);
         sanPham.setMasanpham(masanpham);

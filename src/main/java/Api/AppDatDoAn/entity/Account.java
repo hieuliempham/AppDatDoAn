@@ -4,6 +4,7 @@ import Api.AppDatDoAn.validator.annotation.ValidUsername;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 @Table(name = "account")
 public class Account {
     @Id
@@ -41,10 +43,18 @@ public class Account {
 
     private boolean enabled;
 
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private ShoppingCart cart;
+
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "account_role",
             joinColumns = @JoinColumn(name = "account_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    public Account(String username, String password, Set<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.roles = roles;
+    }
 }

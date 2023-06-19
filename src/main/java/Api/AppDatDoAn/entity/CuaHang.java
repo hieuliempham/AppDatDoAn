@@ -12,7 +12,7 @@ import java.util.List;
 @Table(name = "cuahang")
 public class CuaHang {
     @Id
-    @Column(name = "macuahang", length = 10, unique = true)
+    @Column(name = "macuahang", length = 50, unique = true)
     private String macuahang;
 
     @NotBlank(message = "Tên cửa hàng không được phép bỏ trống")
