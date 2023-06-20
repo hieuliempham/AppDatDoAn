@@ -14,12 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 import java.security.Principal;
 
 @Controller
 @RequestMapping("/customer")
 public class ShoppingCartController {
 
+    @Autowired
     private ShoppingCartService cartService;
     @Autowired
     private SanPhamService productService;
@@ -48,15 +50,16 @@ public class ShoppingCartController {
     }
 
     @PostMapping("/add-to-cart")
-    public String addItemToCart(@RequestParam("id") String id,
+    public String addItemToCart(@RequestParam("id") Long id,
                                 @RequestParam(value = "quantity", required = false, defaultValue = "1") int quantity,
                                 HttpServletRequest request,
                                 Model model,
                                 Principal principal,
-                                HttpSession session) {
+                                HttpSession session)
+    {
 
 
-        SanPham productDto = productService.getSanPhamById(id);
+        SanPham productDto = productService.getSanPhamById(Long.toString(id));
         if (principal == null) {
             return "redirect:/login";
         } else {
@@ -65,7 +68,7 @@ public class ShoppingCartController {
             session.setAttribute("totalItems", shoppingCart.getTongMatHang());
             model.addAttribute("shoppingCart", shoppingCart);
         }
-        return "redirect:" + request.getHeader("Referer");
+        return "redirect:/" + request.getHeader("Referer");
     }
 
     @RequestMapping(value = "/update-cart", method = RequestMethod.POST, params = "action=update")

@@ -28,6 +28,19 @@ public class CartItem {
     private int soLuong;
     private double donViTinh;
 
+    public CartItem(SanPham product, int quantity, ShoppingCart cart) {
+        this.sanPham = product;
+        this.soLuong = quantity;
+        this.cart = cart;
+    }
+
+    public double getSubtotal() {
+        return sanPham.getGia() * soLuong;
+    }
+
+    public void incrementQuantity(int soLuong) {
+        this.soLuong += soLuong;
+    }
     @Override
     public String toString() {
         return "CartItem{" +
