@@ -1,6 +1,7 @@
 package Api.AppDatDoAn.entity;
 
 import Api.AppDatDoAn.reponsitory.IAccountRepository;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
 public class CustomUserDetail implements UserDetails {
     private final Account account;
 

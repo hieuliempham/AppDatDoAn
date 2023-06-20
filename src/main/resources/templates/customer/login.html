@@ -57,7 +57,7 @@
                 <p>You have been logged out</p>
             </div>
 
-            <form th:action="@{/do-login}" method="post">
+            <form th:action="@{do-login}" method="post">
                 <div class="input-form">
                     <!-- <span>User name</span> -->
                     <input type="text" placeholder="Name" name="username">
@@ -70,7 +70,7 @@
                     <input type="submit" value="Log In">
                 </div>
                 <div class="input-form">
-                    <p>Do You Already Have An Account ? <a th:href="@{/register}">Sign up now </a></p>
+                    <p>Do You Already Have An Account ? <a th:href="@{register}">Sign up now </a></p>
                 </div>
             </form>
             <h3>Log In With Social Network</h3>

@@ -3,6 +3,7 @@ package Api.AppDatDoAn.services;
 import Api.AppDatDoAn.entity.Account;
 import Api.AppDatDoAn.reponsitory.IAccountRepository;
 import Api.AppDatDoAn.reponsitory.IRoleRepository;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,9 +12,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@NoArgsConstructor
 public class AccountService {
-    @Autowired
+
     private IAccountRepository accountRepository;
+    @Autowired
+    public AccountService(IAccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Autowired
     private IRoleRepository roleRepository;

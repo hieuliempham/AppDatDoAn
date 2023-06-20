@@ -4,6 +4,7 @@ import Api.AppDatDoAn.entity.Account;
 import Api.AppDatDoAn.entity.ShoppingCart;
 import Api.AppDatDoAn.services.AccountService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +15,14 @@ import java.security.Principal;
 @Controller
 @RequestMapping("/customer")
 public class CustomerController {
-    @GetMapping
+    @Autowired
+    private AccountService accountService;
+
+    @GetMapping()
     public String home_customer(Model model, Principal principal, HttpSession session) {
         model.addAttribute("title", "Home");
         model.addAttribute("page", "Home");
         if (principal != null) {
-            AccountService accountService = new AccountService();
             Account customer = accountService.getAccountByUsername(principal.getName());
             session.setAttribute("username", customer.getUsername());
             ShoppingCart shoppingCart = customer.getCart();

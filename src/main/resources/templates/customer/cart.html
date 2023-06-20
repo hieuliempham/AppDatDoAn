@@ -58,23 +58,24 @@
                         <tr th:each="cartItem : ${shoppingCart.cartItem}">
                             <td class="thumbnail-img">
                                 <a href="#">
-                                    <img class="img-fluid"
-                                         th:src="*{'data:image/jpeg;base64,' + cartItem.product.image}" alt=""/>
+<!--                                    <img class="img-fluid"-->
+<!--                                         th:src="*{'data:image/jpeg;base64,' + cartItem.product.image}" alt=""/>-->
+                                    <img th:src="${cartItem.sanPham.hinhanh}" class="img-fluid" alt="Image">
                                 </a>
                             </td>
                             <td class="name-pr">
-                                <p th:text="${cartItem.product.name}"></p>
+                                <p th:text="${cartItem.sanPham.tensanpham}"></p>
                             </td>
                             <td class="price-pr">
-                                <p th:text="'$' + ${cartItem.product.costPrice}"></p>
+                                <p th:text="'$' + ${cartItem.sanPham.gia}"></p>
                             </td>
-                            <form th:action="@{/update-cart}" method="post">
-                                <input type="hidden" name="id" th:value="${cartItem.product.id}">
-                                <td class="quantity-box"><input type="number" size="4" th:value="${cartItem.quantity}"
+                            <form th:action="@{customer/update-cart}" method="post">
+                                <input type="hidden" name="id" th:value="${cartItem.sanPham.masanpham}">
+                                <td class="quantity-box"><input type="number" size="4" th:value="${cartItem.soLuong}"
                                                                 name="quantity" min="0" step="1"
                                                                 class="c-input-text qty text"></td>
                                 <td class="total-pr">
-                                    <p th:text="'$' + ${cartItem.totalPrice}"></p>
+                                    <p th:text="'Đ' + ${grandTotal}"></p>
                                 </td>
                                 <td class="remove-pr">
                                     <button type="submit" name="action" value="update" title="Update"
@@ -123,7 +124,7 @@
                     <hr>
                 </div>
             </div>
-            <div class="col-12 d-flex shopping-box"><a th:href="@{/check-out}" class="ml-auto btn hvr-hover">Checkout</a>
+            <div class="col-12 d-flex shopping-box"><a th:href="@{customer/check-out}" class="ml-auto btn hvr-hover">Checkout</a>
             </div>
         </div>
 
